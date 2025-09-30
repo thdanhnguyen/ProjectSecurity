@@ -1,0 +1,99 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard - Secure Auth System{% endblock %}
+
+{% block content %}
+<div class="dashboard-page">
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-brand">
+                <h2>🔐 Secure Auth</h2>
+            </div>
+            <div class="navbar-menu">
+                <a href="{{ url_for('dashboard') }}" class="nav-link active">Dashboard</a>
+                <a href="{{ url_for('profile') }}" class="nav-link">Hồ Sơ</a>
+                <a href="{{ url_for('security') }}" class="nav-link">Bảo Mật</a>
+                <a href="{{ url_for('logout') }}" class="nav-link">Đăng Xuất</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container dashboard-content">
+        <div class="welcome-section">
+            <h1>Chào mừng, {{ user.username }}! 👋</h1>
+            <p>Bạn đã đăng nhập thành công vào hệ thống</p>
+        </div>
+
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-icon">👤</div>
+                <div class="stat-content">
+                    <h3>Tài Khoản</h3>
+                    <p class="stat-value">{{ user.username }}</p>
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon">📧</div>
+                <div class="stat-content">
+                    <h3>Email</h3>
+                    <p class="stat-value">{{ user.email }}</p>
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon">🕐</div>
+                <div class="stat-content">
+                    <h3>Đăng Nhập Cuối</h3>
+                    <p class="stat-value">{{ user.last_login or 'Lần đầu' }}</p>
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon">✅</div>
+                <div class="stat-content">
+                    <h3>Trạng Thái</h3>
+                    <p class="stat-value">Hoạt động</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="info-section">
+            <h2>Thông Tin Bảo Mật</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>🔒 Mật Khẩu Băm</h3>
+                    <p>Mật khẩu của bạn được bảo vệ bằng:</p>
+                    <ul>
+                        <li><strong>Bcrypt:</strong> Thuật toán băm an toàn nhất</li>
+                        <li><strong>SHA-256:</strong> Băm 256-bit</li>
+                        <li><strong>MD5:</strong> Băm 128-bit (legacy)</li>
+                    </ul>
+                </div>
+
+                <div class="info-card">
+                    <h3>📱 Xác Thực 2 Lớp</h3>
+                    <p>Hệ thống sử dụng OTP qua email:</p>
+                    <ul>
+                        <li>Mã OTP 6 chữ số</li>
+                        <li>Có hiệu lực 5 phút</li>
+                        <li>Gửi qua email đã đăng ký</li>
+                        <li>Bảo vệ tài khoản tối đa</li>
+                    </ul>
+                </div>
+
+                <div class="info-card">
+                    <h3>🛡️ Bảo Mật Session</h3>
+                    <p>Phiên làm việc được bảo vệ:</p>
+                    <ul>
+                        <li>Session cookie secure</li>
+                        <li>HttpOnly flag enabled</li>
+                        <li>SameSite protection</li>
+                        <li>Timeout sau 30 phút</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,93 @@
+{% extends "base.html" %}
+
+{% block title %}Bảo Mật - Secure Auth System{% endblock %}
+
+{% block content %}
+<div class="dashboard-page">
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-brand">
+                <h2>🔐 Secure Auth</h2>
+            </div>
+            <div class="navbar-menu">
+                <a href="{{ url_for('dashboard') }}" class="nav-link">Dashboard</a>
+                <a href="{{ url_for('profile') }}" class="nav-link">Hồ Sơ</a>
+                <a href="{{ url_for('security') }}" class="nav-link active">Bảo Mật</a>
+                <a href="{{ url_for('logout') }}" class="nav-link">Đăng Xuất</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container dashboard-content">
+        <h1>Cài Đặt Bảo Mật</h1>
+
+        <div class="security-section">
+            <div class="security-card">
+                <h3>🔑 Đổi Mật Khẩu</h3>
+                <form method="POST" action="{{ url_for('change_password') }}" class="security-form">
+                    <div class="form-group">
+                        <label for="current_password">Mật khẩu hiện tại</label>
+                        <input type="password" id="current_password" name="current_password" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="new_password">Mật khẩu mới</label>
+                        <input type="password" id="new_password" name="new_password" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="confirm_password">Xác nhận mật khẩu mới</label>
+                        <input type="password" id="confirm_password" name="confirm_password" required>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Đổi Mật Khẩu</button>
+                </form>
+            </div>
+
+            <div class="security-card">
+                <h3>🔐 Thông Tin Mật Khẩu Băm</h3>
+                <p>Mật khẩu của bạn được lưu trữ dưới dạng băm:</p>
+                
+                <div class="hash-info">
+                    <div class="hash-item">
+                        <strong>Bcrypt (Chính):</strong>
+                        <code class="hash-code">{{ user.password_hash[:50] }}...</code>
+                        <span class="hash-badge">An toàn nhất</span>
+                    </div>
+                    
+                    <div class="hash-item">
+                        <strong>SHA-256:</strong>
+                        <code class="hash-code">{{ user.password_sha256[:50] }}...</code>
+                        <span class="hash-badge">256-bit</span>
+                    </div>
+                    
+                    <div class="hash-item">
+                        <strong>MD5 (Legacy):</strong>
+                        <code class="hash-code">{{ user.password_md5 }}</code>
+                        <span class="hash-badge hash-badge-warning">Không an toàn</span>
+                    </div>
+                </div>
+
+                <div class="security-note">
+                    <strong>⚠️ Lưu ý:</strong> MD5 chỉ được lưu để demo. Trong thực tế, chỉ nên dùng Bcrypt hoặc Argon2.
+                </div>
+            </div>
+
+            <div class="security-card">
+                <h3>📱 Xác Thực 2 Lớp (2FA)</h3>
+                <p>Hệ thống đang sử dụng OTP qua email</p>
+                <div class="security-status">
+                    <span class="status-icon">✅</span>
+                    <span class="status-text">Đã kích hoạt</span>
+                </div>
+                <ul class="security-list">
+                    <li>Mã OTP 6 chữ số</li>
+                    <li>Gửi qua email: {{ user.email }}</li>
+                    <li>Có hiệu lực 5 phút</li>
+                    <li>Bắt buộc khi đăng nhập</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

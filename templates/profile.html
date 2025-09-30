@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+
+{% block title %}Hồ Sơ - Secure Auth System{% endblock %}
+
+{% block content %}
+<div class="dashboard-page">
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-brand">
+                <h2>🔐 Secure Auth</h2>
+            </div>
+            <div class="navbar-menu">
+                <a href="{{ url_for('dashboard') }}" class="nav-link">Dashboard</a>
+                <a href="{{ url_for('profile') }}" class="nav-link active">Hồ Sơ</a>
+                <a href="{{ url_for('security') }}" class="nav-link">Bảo Mật</a>
+                <a href="{{ url_for('logout') }}" class="nav-link">Đăng Xuất</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container dashboard-content">
+        <h1>Thông Tin Cá Nhân</h1>
+
+        <div class="profile-section">
+            <div class="profile-card">
+                <div class="profile-avatar">
+                    <div class="avatar-circle">{{ user.username[0].upper() }}</div>
+                </div>
+                <div class="profile-info">
+                    <h2>{{ user.username }}</h2>
+                    <p class="profile-email">{{ user.email }}</p>
+                    <p class="profile-meta">Tham gia: {{ user.created_at }}</p>
+                </div>
+            </div>
+
+            <div class="details-card">
+                <h3>Chi Tiết Tài Khoản</h3>
+                <div class="detail-row">
+                    <span class="detail-label">Tên đăng nhập:</span>
+                    <span class="detail-value">{{ user.username }}</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Email:</span>
+                    <span class="detail-value">{{ user.email }}</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Số điện thoại:</span>
+                    <span class="detail-value">{{ user.phone or 'Chưa cập nhật' }}</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Ngày tạo:</span>
+                    <span class="detail-value">{{ user.created_at }}</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Đăng nhập cuối:</span>
+                    <span class="detail-value">{{ user.last_login or 'Lần đầu' }}</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Trạng thái:</span>
+                    <span class="detail-value">
+                        <span class="badge badge-success">Hoạt động</span>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

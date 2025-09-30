@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+
+{% block title %}Trang Chủ - Secure Auth System{% endblock %}
+
+{% block content %}
+<div class="landing-page">
+    <div class="hero-section">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-badge">🔐 Bảo Mật Cao</div>
+                <h1 class="hero-title">Hệ Thống Xác Thực An Toàn</h1>
+                <p class="hero-subtitle">
+                    Ứng dụng xác thực người dùng với OTP và mật khẩu băm<br>
+                    Sử dụng MD5, SHA-256, Bcrypt và xác thực 2 lớp (2FA)
+                </p>
+                <div class="hero-buttons">
+                    <a href="{{ url_for('register') }}" class="btn btn-primary btn-lg">
+                        Đăng Ký Ngay
+                    </a>
+                    <a href="{{ url_for('login') }}" class="btn btn-outline btn-lg">
+                        Đăng Nhập
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="features-section">
+        <div class="container">
+            <h2 class="section-title">Tính Năng Bảo Mật</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🔒</div>
+                    <h3>Mật Khẩu Băm</h3>
+                    <p>Sử dụng MD5, SHA-256 và Bcrypt để bảo vệ mật khẩu của bạn</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📱</div>
+                    <h3>OTP Qua Email</h3>
+                    <p>Xác thực 2 lớp với mã OTP gửi đến email của bạn</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🛡️</div>
+                    <h3>Bảo Mật Cao</h3>
+                    <p>Session management và protection chống tấn công</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h3>Nhanh & Hiệu Quả</h3>
+                    <p>Xác thực nhanh chóng với hiệu suất tối ưu</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="tech-section">
+        <div class="container">
+            <h2 class="section-title">Công Nghệ Sử Dụng</h2>
+            <div class="tech-grid">
+                <div class="tech-item">
+                    <div class="tech-name">Python Flask</div>
+                    <div class="tech-desc">Web Framework</div>
+                </div>
+                <div class="tech-item">
+                    <div class="tech-name">SQLite</div>
+                    <div class="tech-desc">Database</div>
+                </div>
+                <div class="tech-item">
+                    <div class="tech-name">Bcrypt</div>
+                    <div class="tech-desc">Password Hashing</div>
+                </div>
+                <div class="tech-item">
+                    <div class="tech-name">OTP</div>
+                    <div class="tech-desc">Two-Factor Auth</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <p>© 2025 Secure Auth System. Đồ án Bảo Mật An Ninh Thông Tin.</p>
+        </div>
+    </footer>
+</div>
+{% endblock %}

@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block title %}404 - Không Tìm Thấy{% endblock %}
+
+{% block content %}
+<div class="error-page">
+    <div class="error-content">
+        <h1 class="error-code">404</h1>
+        <h2 class="error-title">Không Tìm Thấy Trang</h2>
+        <p class="error-message">Trang bạn đang tìm kiếm không tồn tại hoặc đã bị xóa.</p>
+        <a href="{{ url_for('index') }}" class="btn btn-primary">Về Trang Chủ</a>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,120 @@
+{% extends "base.html" %}
+
+{% block title %}Đăng Ký - Secure Auth System{% endblock %}
+
+{% block content %}
+<div class="auth-page">
+    <div class="auth-container">
+        <div class="auth-card">
+            <div class="auth-header">
+                <h1>Đăng Ký Tài Khoản</h1>
+                <p>Tạo tài khoản mới để sử dụng hệ thống</p>
+            </div>
+
+            <form method="POST" action="{{ url_for('register') }}" class="auth-form" id="registerForm">
+                <div class="form-group">
+                    <label for="username">Tên đăng nhập</label>
+                    <input type="text" id="username" name="username" required 
+                           placeholder="Nhập tên đăng nhập" autocomplete="username">
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required 
+                           placeholder="your@email.com" autocomplete="email">
+                </div>
+
+                <div class="form-group">
+                    <label for="phone">Số điện thoại (tùy chọn)</label>
+                    <input type="tel" id="phone" name="phone" 
+                           placeholder="+84 xxx xxx xxx" autocomplete="tel">
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Mật khẩu</label>
+                    <div class="password-input">
+                        <input type="password" id="password" name="password" required 
+                               placeholder="Ít nhất 8 ký tự" autocomplete="new-password">
+                        <button type="button" class="toggle-password" onclick="togglePassword('password')">
+                            👁️
+                        </button>
+                    </div>
+                    <div class="password-strength" id="passwordStrength"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="confirm_password">Xác nhận mật khẩu</label>
+                    <div class="password-input">
+                        <input type="password" id="confirm_password" name="confirm_password" required 
+                               placeholder="Nhập lại mật khẩu" autocomplete="new-password">
+                        <button type="button" class="toggle-password" onclick="togglePassword('confirm_password')">
+                            👁️
+                        </button>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-block">
+                    Đăng Ký
+                </button>
+            </form>
+
+            <div class="auth-footer">
+                <p>Đã có tài khoản? <a href="{{ url_for('login') }}">Đăng nhập ngay</a></p>
+            </div>
+        </div>
+
+        <div class="auth-info">
+            <h3>🔐 Bảo Mật Mật Khẩu</h3>
+            <ul>
+                <li>✓ Mật khẩu được băm với Bcrypt</li>
+                <li>✓ Lưu trữ thêm MD5 và SHA-256</li>
+                <li>✓ Không lưu mật khẩu dạng plain text</li>
+                <li>✓ Xác thực 2 lớp với OTP</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<script>
+// Password strength checker
+document.getElementById('password').addEventListener('input', function(e) {
+    const password = e.target.value;
+    const strengthDiv = document.getElementById('passwordStrength');
+    
+    if (password.length === 0) {
+        strengthDiv.innerHTML = '';
+        return;
+    }
+    
+    let strength = 0;
+    let feedback = [];
+    
+    if (password.length >= 8) strength++;
+    else feedback.push('Ít nhất 8 ký tự');
+    
+    if (/[a-z]/.test(password)) strength++;
+    else feedback.push('Chữ thường');
+    
+    if (/[A-Z]/.test(password)) strength++;
+    else feedback.push('Chữ hoa');
+    
+    if (/[0-9]/.test(password)) strength++;
+    else feedback.push('Số');
+    
+    if (/[^a-zA-Z0-9]/.test(password)) strength++;
+    else feedback.push('Ký tự đặc biệt');
+    
+    const levels = ['Rất yếu', 'Yếu', 'Trung bình', 'Mạnh', 'Rất mạnh'];
+    const colors = ['#dc3545', '#fd7e14', '#ffc107', '#28a745', '#20c997'];
+    
+    strengthDiv.innerHTML = `
+        <div class="strength-bar">
+            <div class="strength-fill" style="width: ${strength * 20}%; background: ${colors[strength - 1] || '#dc3545'}"></div>
+        </div>
+        <div class="strength-text" style="color: ${colors[strength - 1] || '#dc3545'}">
+            ${levels[strength - 1] || 'Rất yếu'} ${feedback.length > 0 ? '- Cần: ' + feedback.join(', ') : ''}
+        </div>
+    `;
+});
+</script>
+{% endblock %}
