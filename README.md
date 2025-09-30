@@ -54,7 +54,7 @@ Truy cập: http://localhost:5000
 
 ## 📁 Cấu Trúc Project
 
-\`\`\`
+```
 secure-auth-app/
 ├── app.py                 # Main application
 ├── database.py            # Database operations
@@ -79,7 +79,7 @@ secure-auth-app/
     │   └── style.css
     └── js/
         └── main.js
-\`\`\`
+```
 
 ## 🔐 Thuật Toán Băm Mật Khẩu
 
