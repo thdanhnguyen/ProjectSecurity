@@ -5,15 +5,18 @@ Gửi OTP qua email
 import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
+from dotenv import load_dotenv
 import os
+
+load_dotenv()
 
 class EmailService:
     def __init__(self):
         # Cấu hình email - Thay đổi thông tin này
         self.smtp_server = os.getenv('SMTP_SERVER', 'smtp.gmail.com')
         self.smtp_port = int(os.getenv('SMTP_PORT', '587'))
-        self.sender_email = os.getenv('SENDER_EMAIL', 'your-email@gmail.com')
-        self.sender_password = os.getenv('SENDER_PASSWORD', 'your-app-password')
+        self.sender_email = os.getenv('SENDER_EMAIL', os.getenv('EMAIL'))
+        self.sender_password = os.getenv('SENDER_PASSWORD', os.getenv('PASSWORD'))
         self.sender_name = 'Secure Auth System'
     
     def send_otp_email(self, recipient_email, username, otp_code):
@@ -137,20 +140,14 @@ class EmailService:
             print(f"Subject: Mã OTP đăng nhập - {otp_code}")
             print(f"OTP Code: {otp_code}")
             print(f"{'='*60}\n")
-            
-            # Uncomment để gửi email thật
-            # with smtplib.SMTP(self.smtp_server, self.smtp_port) as server:
-            #     server.starttls()
-            #     server.login(self.sender_email, self.sender_password)
-            #     server.send_message(message)
+
+            with smtplib.SMTP(self.smtp_server, self.smtp_port) as server:
+                server.starttls()
+                server.login(self.sender_email, self.sender_password)
+                server.send_message(message)
             
             return True
             
         except Exception as e:
             print(f"❌ Lỗi gửi email: {str(e)}")
             return False
-    
-    def send_welcome_email(self, recipient_email, username):
-        """Gửi email chào mừng khi đăng ký"""
-        # Tương tự như send_otp_email
-        pass
