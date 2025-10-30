@@ -28,23 +28,7 @@ Hệ thống xác thực người dùng an toàn với OTP và mật khẩu băm
 pip install -r requirements.txt
 \`\`\`
 
-### 2. Cấu hình Email (Tùy chọn)
-
-Mở file `email_service.py` và cập nhật thông tin email:
-
-\`\`\`python
-self.smtp_server = 'smtp.gmail.com'
-self.smtp_port = 587
-self.sender_email = 'your-email@gmail.com'
-self.sender_password = 'your-app-password'
-\`\`\`
-
-**Lưu ý**: Để gửi email qua Gmail, bạn cần tạo App Password:
-1. Vào Google Account Settings
-2. Security → 2-Step Verification
-3. App passwords → Tạo mật khẩu ứng dụng
-
-### 3. Chạy ứng dụng
+### 2. Chạy ứng dụng
 
 \`\`\`bash
 python app.py
@@ -198,22 +182,6 @@ secure-auth-app/
 7. ✅ OTP hết hạn → Reject
 8. ✅ Đổi mật khẩu → Success
 
-## 📝 Lưu Ý
-
-### Chế Độ Demo
-- Email OTP được in ra console thay vì gửi thật
-- Để gửi email thật, uncomment code trong `email_service.py`
-
-### Production Deployment
-1. Đổi `app.secret_key` thành giá trị bảo mật
-2. Tắt `debug=True`
-3. Sử dụng HTTPS
-4. Cấu hình email service
-5. Sử dụng PostgreSQL thay vì SQLite
-6. Thêm rate limiting
-7. Thêm logging
-8. Backup database định kỳ
-
 ## 🔧 Mở Rộng
 
 ### Tính Năng Có Thể Thêm
@@ -239,60 +207,5 @@ secure-auth-app/
 
 Đồ án Bảo Mật An Ninh Thông Tin
 
-## 📄 License
-
-MIT License - Free to use for educational purposes
-
----
-
 **⚠️ Disclaimer**: Đây là project học tập. Trong production, cần thêm nhiều biện pháp bảo mật khác.
 \`\`\`
-
-```text file=".gitignore"
-# Python
-__pycache__/
-*.py[cod]
-*$py.class
-*.so
-.Python
-env/
-venv/
-ENV/
-build/
-develop-eggs/
-dist/
-downloads/
-eggs/
-.eggs/
-lib/
-lib64/
-parts/
-sdist/
-var/
-wheels/
-*.egg-info/
-.installed.cfg
-*.egg
-
-# Database
-*.db
-*.sqlite
-*.sqlite3
-
-# Environment
-.env
-.env.local
-
-# IDE
-.vscode/
-.idea/
-*.swp
-*.swo
-*~
-
-# OS
-.DS_Store
-Thumbs.db
-
-# Logs
-*.log
